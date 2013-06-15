@@ -1,0 +1,275 @@
+<?php
+// src/Acme/BlogBundle/Entity/Blog.php
+
+namespace Acme\BlogBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+
+/**
+ * @ORM\Entity(repositoryClass="Acme\BlogBundle\Entity\Repository\BlogRepository")
+ * @ORM\Table(name="blog")
+ * @ORM\HasLifecycleCallbacks()
+ */
+class Blog
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $title;
+
+
+     /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $auther;
+
+  
+    /**
+     * @ORM\Column(type="text")
+     */
+    protected $blog;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    protected $image;   
+
+     /**
+     * @ORM\Column(type="text")
+     */
+    protected $tags;
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $created;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    protected $modified;
+
+     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="blog")
+     */
+    protected $comments;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $slug;
+
+
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Blog
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string 
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set auther
+     *
+     * @param string $auther
+     * @return Blog
+     */
+    public function setAuther($auther)
+    {
+        $this->auther = $auther;
+    
+        return $this;
+    }
+
+    /**
+     * Get auther
+     *
+     * @return string 
+     */
+    public function getAuther()
+    {
+        return $this->auther;
+    }
+
+
+    /**
+     * Set tags
+     *
+     * @param string $tags
+     * @return Blog
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+    
+        return $this;
+    }
+
+    /**
+     * Get tags
+     *
+     * @return string 
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * Set blog
+     *
+     * @param string $blog
+     * @return Blog
+     */
+    public function setBlog($blog)
+    {
+        $this->blog = $blog;
+    
+        return $this;
+    }
+
+    /**
+     * Get blog
+     *
+     * @return string 
+     */
+    public function getBlog()
+    {
+        return $this->blog;
+    }
+
+
+    //public function setImage(File $image = null){ $this->image = $image; }
+    public function setImage($image){ $this->image = $image; }
+    public function getImage() { return $this->image; }
+
+   
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     * @return Blog
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+    
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set modified
+     *
+     * @param \DateTime $modified
+     * @return Blog
+     */
+    public function setModified($modified)
+    {
+        $this->modified = $modified;
+    
+        return $this;
+    }
+
+    /**
+     * Get modified
+     *
+     * @return \DateTime 
+     */
+    public function getModified()
+    {
+        return $this->modified;
+    }
+
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+
+        $this->setCreated(new \DateTime());
+        $this->setUpdated(new \DateTime());
+    }
+
+
+
+    /**
+     * Add comments
+     *
+     * @param \Acme\BlogBundle\Entity\Comment $comments
+     * @return Blog
+     */
+    public function addComment(\Acme\BlogBundle\Entity\Comment $comments)
+    {
+        $this->comments[] = $comments;
+    
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param \Acme\BlogBundle\Entity\Comment $comments
+     */
+    public function removeComment(\Acme\BlogBundle\Entity\Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+}

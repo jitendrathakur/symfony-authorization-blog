@@ -1,0 +1,73 @@
+
+_post:
+    pattern:  /
+    defaults: { _controller: AcmeBlogBundle:Page:index }
+    requirements:
+        _method:  GET
+
+
+AcmeBlogBundle_about:
+    pattern:  /about
+    defaults: { _controller: AcmeBlogBundle:Page:about }
+    requirements:
+        _method:  GET
+
+
+AcmeBlogBundle_contact:
+    pattern:  /contact
+    defaults: { _controller: AcmeBlogBundle:Page:contact }
+    requirements:
+        _method:  GET|POST
+
+AcmeBlogBundle_blog_show:
+    pattern:  /blog/show/{id}/{slug}
+    defaults: { _controller: AcmeBlogBundle:Blog:show }
+    requirements:
+        _method:  GET
+        id: \d+
+
+
+AcmeBlogBundle_comment_create:
+    pattern:  /comment/{blog_id}
+    defaults: { _controller: AcmeBlogBundle:Comment:create }
+    requirements:
+        _method:  POST
+        blog_id: \d+
+
+AcmeBlogBundle_comment_new:
+    pattern:  /comment/new/{blog_id}
+    defaults: { _controller: AcmeBlogBundle:Comment:new }
+    requirements:
+        _method:  GET|POST
+        blog_id: \d+
+
+AcmeBlogBundle_page_sidebar:
+    pattern:  /page/sidebar
+    defaults: { _controller: AcmeBlogBundle:Page:sidebar }
+    requirements:
+        _method:  GET|POST
+       
+
+_demo_secured:
+    resource: "@AcmeDemoBundle/Controller/SecuredController.php"
+    type:     annotation
+
+_demo:
+    resource: "@AcmeDemoBundle/Controller/DemoController.php"
+    type:     annotation
+    prefix:   /demo
+
+_wdt:
+    resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
+    prefix:   /_wdt
+
+_profiler:
+    resource: "@WebProfilerBundle/Resources/config/routing/profiler.xml"
+    prefix:   /_profiler
+
+_configurator:
+    resource: "@SensioDistributionBundle/Resources/config/routing/webconfigurator.xml"
+    prefix:   /_configurator
+
+_main:
+    resource: routing.yml

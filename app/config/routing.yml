@@ -1,0 +1,115 @@
+
+_post:
+    pattern:  /
+    defaults: { _controller: AcmeBlogBundle:Page:index }
+    requirements:
+        _method:  GET
+
+
+AcmeBlogBundle_about:
+    pattern:  /about
+    defaults: { _controller: AcmeBlogBundle:Page:about }
+    requirements:
+        _method:  GET
+
+
+AcmeBlogBundle_contact:
+    pattern:  /contact
+    defaults: { _controller: AcmeBlogBundle:Page:contact }
+    requirements:
+        _method:  GET|POST
+
+AcmeBlogBundle_blog_show:
+    pattern:  /blog/show/{id}/{slug}
+    defaults: { _controller: AcmeBlogBundle:Blog:show }
+    requirements:
+        _method:  GET
+        id: \d+
+
+
+AcmeBlogBundle_comment_create:
+    pattern:  /comment/{blog_id}
+    defaults: { _controller: AcmeBlogBundle:Comment:create }
+    requirements:
+        _method:  POST
+        blog_id: \d+
+
+AcmeBlogBundle_comment_new:
+    pattern:  /comment/new/{blog_id}
+    defaults: { _controller: AcmeBlogBundle:Comment:new }
+    requirements:
+        _method:  GET|POST
+        blog_id: \d+
+
+AcmeBlogBundle_page_sidebar:
+    pattern:  /page/sidebar
+    defaults: { _controller: AcmeBlogBundle:Page:sidebar }
+    requirements:
+        _method:  GET|POST
+
+AcmeUserBundle_user_register:
+    pattern:  /user/register
+    defaults: { _controller: AcmeUserBundle:User:register }
+    requirements:
+        _method:  GET|POST
+
+AcmeUserBundle_user_create:
+    pattern:  /user/create
+    defaults: { _controller: AcmeUserBundle:User:create }
+    requirements:
+        _method:  GET|POST
+
+AcmeBlogBundle_blog_new:
+    pattern:  /blogs/new
+    defaults: { _controller: AcmeBlogBundle:Blog:new }
+    requirements:
+        _method:  GET|POST
+
+AcmeBlogBundle_blog_delete:
+    pattern:  /blogs/delete/{id}
+    defaults: { _controller: AcmeBlogBundle:Blog:delete }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+
+AcmeBlogBundle_blog_edit:
+    pattern:  /blogs/edit/{id}/{slug}
+    defaults: { _controller: AcmeBlogBundle:Blog:edit }
+    requirements:
+        _method:  GET|POST
+        id: \d+
+
+login:
+    pattern: /login
+    defaults: { _controller: AcmeUserBundle:User:login }
+ 
+login_check:
+    pattern: /login_check
+    defaults: { _controller: AcmeUserBundle:User:loginCheck}
+ 
+logout:
+    pattern: /logout
+    defaults: { _controller: AcmeUserBundle:User:logout}
+       
+
+_demo_secured:
+    resource: "@AcmeDemoBundle/Controller/SecuredController.php"
+    type:     annotation
+
+_demo:
+    resource: "@AcmeDemoBundle/Controller/DemoController.php"
+    type:     annotation
+    prefix:   /demo
+
+_wdt:
+    resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
+    prefix:   /_wdt
+
+_profiler:
+    resource: "@WebProfilerBundle/Resources/config/routing/profiler.xml"
+    prefix:   /_profiler
+
+_configurator:
+    resource: "@SensioDistributionBundle/Resources/config/routing/webconfigurator.xml"
+    prefix:   /_configurator
+

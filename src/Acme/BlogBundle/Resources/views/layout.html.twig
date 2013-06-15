@@ -1,0 +1,95 @@
+{# src/Acme/BlogBundle/Resources/views/layout.html.twig #}
+
+<!-- app/Resources/views/base.html.twig -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html"; charset=utf-8" />
+        <title>{% block title %}symblog{% endblock %} - symblog</title>
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        {% block stylesheets %}
+            <link href='http://fonts.googleapis.com/css?family=Irish+Grover' rel='stylesheet' type='text/css'>
+            <link href='http://fonts.googleapis.com/css?family=La+Belle+Aurore' rel='stylesheet' type='text/css'>
+            <link href="{{ asset('css/screen.css') }}" type="text/css" rel="stylesheet" />
+             <link href="{{ asset('css/bootstrap-responsive.min.css') }}" type="text/css" rel="stylesheet" />
+            <link href="{{ asset('css/bootstrap.min.css') }}" type="text/css" rel="stylesheet" />
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+             <script src="{{ asset('js/custom.js') }}"></script>
+
+         
+                     
+            {% stylesheets '@AcmeBlogBundle/Resources/public/css/*' %}
+                <link href="{{ asset_url }}" rel="stylesheet" media="screen" />
+            {% endstylesheets %}
+
+             {% javascripts '@AcmeBlogBundle/Resources/public/js/*' %}
+                <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+
+        {% endblock %}           
+   
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+        
+    </head>
+    <body>
+
+        <section id="wrapper">
+            <header id="header">
+
+                <div class="top">
+                    {% block navigation %}
+
+                        <nav>        
+
+                            <ul class="navigation">
+                             {% if is_granted("ROLE_USER") %}
+                                Hi {{ app.user.username }}
+                                <a href="{{ path('logout') }}">Logout</a>
+                                <li><a href="{{ path('AcmeBlogBundle_blog_new') }}">New Blog</a></li>
+                            {% else %}
+                                <a href="{{ path('login') }}">Login</a>
+                                <a href="{{ path('AcmeUserBundle_user_register') }}">Signup</a>
+                            {% endif %} 
+                                <li><a href="{{ path('_post') }}">Home</a></li>
+                                <li><a href="{{ path('AcmeBlogBundle_about') }}">About</a></li>
+                                <li><a href="{{ path('AcmeBlogBundle_contact') }}">Contact</a></li>
+                                
+                            </ul>
+
+                                
+                        </nav>
+                    {% endblock %}
+                </div>
+
+                <hgroup>
+                    <h2>{% block blog_title %}<a href="#">symblog</a>{% endblock %}</h2>
+                    <h3>{% block blog_tagline %}<a href="#">creating a blog in Symfony2</a>{% endblock %}</h3>
+                </hgroup>
+            </header>
+
+            <section class="main-col">
+                {% for flashMessage in app.session.flashbag.get('notice') %}
+                        <div class="alert-success alert">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                {% block body %}{% endblock %}
+            </section>
+            <aside class="sidebar">
+                {% block sidebar %}
+                    {% render url("AcmeBlogBundle_page_sidebar") %}
+                {% endblock %}
+            </aside>
+
+            <div id="footer">
+                {% block footer %}
+                    Symfony2 blog tutorial - created by <a href="https://github.com/jitendrathakur">Jitendra Thakur</a>
+                {% endblock %}
+            </div>
+        </section>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

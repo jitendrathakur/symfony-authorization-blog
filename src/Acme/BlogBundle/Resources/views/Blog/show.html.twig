@@ -1,0 +1,45 @@
+{# src/Acme/BlogBundle/Resouces/views/Blog/show.html.twig #}
+{% extends 'AcmeBlogBundle::layout.html.twig' %}
+
+{% block title %}{{ blogs.0.title}}{% endblock %}
+
+{% block body %}
+
+     {% for blog in blogs %}
+
+        <article class="blog">
+            <div class="date"><time datetime="{{ blog.created|date('c') }}">{{ blog.created|date('l, F j, Y') }}</time>
+            <a href="{{ path('AcmeBlogBundle_blog_delete', {'id': blog.id}) }}">Delete</a>
+            <a href="{{ path('AcmeBlogBundle_blog_edit', {'id': blog.id, 'slug' : blog.slug}) }}">Edit</a>
+            </div>
+            <header>
+                <h2><a href="{{ path('AcmeBlogBundle_blog_show', { 'id': blog.id, 'slug': blog.slug }) }}">{{ blog.title }}</a></h2>
+            </header>
+
+            <img src="{{ asset(['uploads/blogs/', blog.image]|join) }}" />
+            <div class="snippet">
+                <p>{{ blog.blog(500) }}</p>
+               
+            </div>
+
+            <footer class="meta">
+                        
+                
+            </footer>
+        </article>
+    
+
+        <section class="comments" id="comments">
+            <section class="previous-comments">
+                <h3>Comments</h3>
+
+                {% include 'AcmeBlogBundle:Comment:index.html.twig' with { 'comments': comments } %} 
+               <h3>Add Comment</h3>
+            {% render url('AcmeBlogBundle_comment_new', { 'blog_id': blog.id }) %} 
+            </section>
+        </section>
+
+      {% else %}
+          <p>There are no blog entries for symblog</p>
+      {% endfor %}
+{% endblock %}

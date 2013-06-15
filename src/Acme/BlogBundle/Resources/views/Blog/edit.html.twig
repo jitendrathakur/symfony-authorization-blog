@@ -1,0 +1,24 @@
+{# src/Acme/BlogBundle/Resouces/views/Blog/edit.html.twig #}
+{% extends 'AcmeBlogBundle::layout.html.twig' %}
+
+{% block title %}}{% endblock %}
+
+{% block body %}
+
+<form action="{{ path('AcmeBlogBundle_blog_edit', {'id': blog.id, 'slug': blog.slug}) }}" method="post" enctype="multipart/form-data" class="well">
+    {{ form_widget(form) }}
+
+   			{% if blog.image != null %}
+   				<a href="javascript:;" class="changeBlogImage">change image</a><br/>
+   			{% else %}
+   				<a href="javascript:;" class="changeBlogImage">add image</a><br/>
+     		{% endif %} 
+    
+            <img src="{{ asset(['uploads/blogs/', blog.image]|join) }}" /><br/>
+
+
+
+    <input type="submit" class="btn btn-primary" value="Submit" />
+</form>
+
+{% endblock %}

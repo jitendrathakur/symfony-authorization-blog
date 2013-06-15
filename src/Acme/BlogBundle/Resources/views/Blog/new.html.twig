@@ -1,0 +1,14 @@
+{# src/Acme/BlogBundle/Resouces/views/Blog/new.html.twig #}
+{% extends 'AcmeBlogBundle::layout.html.twig' %}
+
+{% block title %}}{% endblock %}
+
+{% block body %}
+
+<form action="{{ path('AcmeBlogBundle_blog_new') }}" method="post" {{ form_enctype(form) }} class="well">
+    {{ form_widget(form) }}
+
+    <input type="submit" class="btn btn-primary" value="Submit" />
+</form>
+
+{% endblock %}

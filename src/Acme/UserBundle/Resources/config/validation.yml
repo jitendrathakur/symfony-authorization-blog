@@ -1,0 +1,18 @@
+# src/Acme/BlogBundle/Resources/config/validation.yml
+Acme\UserBundle\Entity\User:
+    getters:
+        passwordLegal:
+            - "True": { message: "The password cannot match your user name" }
+    properties:
+        username:
+            - MinLength: { limit: 3, message: "User name must have at least {{ limit }} characters." }
+        password:
+            - NotBlank: ~
+            - MinLength: { limit: 6, message: "Password must have at least {{ limit }} characters." }
+
+        email:
+            - Email:
+                message: The email "{{ value }}" is not a valid email.
+                checkMX: true
+
+        

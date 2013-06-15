@@ -1,0 +1,5 @@
+services:
+    acme_blog.twig.extension:
+        class: Acme\BlogBundle\Twig\Extensions\AcmeBlogExtension
+        tags:
+            - { name: twig.extension }

@@ -1,0 +1,12 @@
+
+{# src/Acme/UserBundle/Resources/views/User/register.html.twig #}
+{% extends 'AcmeUserBundle::layout.html.twig' %}
+{% block body %}
+
+
+	<form action="{{ path('AcmeUserBundle_user_create')}}" method="post" {{ form_enctype(form) }} class="well">
+	    {{ form_widget(form) }}
+
+	    <input type="submit" class="btn btn-success" value="Submit" />
+	</form>
+{% endblock %}

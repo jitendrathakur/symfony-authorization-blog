@@ -1,0 +1,17 @@
+parameters:
+    database_driver:   pdo_mysql
+    database_host:     localhost
+    database_port:     '3306'
+    database_name:     symfony_blog
+    database_user:     root
+    database_password: null
+
+    mailer_transport: gmail
+    mailer_encryption: ssl
+    mailer_auth_mode: login
+    mailer_host: smtp.gmail.com
+    mailer_user: your_username
+    mailer_password: your_password
+
+    locale:            en
+    secret:            3cee2adab4848010aa33d7276b5b61279
